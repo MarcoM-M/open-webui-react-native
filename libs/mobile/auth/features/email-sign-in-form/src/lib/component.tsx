@@ -126,7 +126,10 @@ export function EmailSignInForm({ onSuccess, onApiUrlChange, setOauthProviders }
     queryRef.current = query;
     setValue('url', query, { shouldValidate: true });
     onApiUrlChange?.(query);
-    setOauthProviders({});
+
+    if (normalizeServerUrl(query) !== serverUrl) {
+      setOauthProviders({});
+    }
   }, [query]);
 
   useEffect(() => {
